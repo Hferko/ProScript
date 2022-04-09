@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <title>Többdimenziós tömbök</title>
+    <style>
+        body {
+            background-color: maroon;
+            padding: 5px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 16px;
+        }
+
+        main {
+            width: 80%;
+            margin: 10px auto;
+            border: 1px solid #333;
+            box-shadow: 8px 8px 8px aquamarine;
+            border-radius: 10px;
+            padding: 15px;
+            background-color: beige;
+            text-align: center;
+        }
+
+        p {
+            line-height: 1.2;
+        }
+
+        article {
+            text-align: left;
+            padding: 10px;
+            border: 1px solid #999;
+            border-radius: 10px;
+            margin-top: 15px;
+            background-color: white;
+        }
+
+        input[type=text],
+        input[type=number] {
+            width: 30%;
+            padding: 2px;
+            border-radius: 6px;
+            resize: vertical;
+            background-color: #FFFACD;
+            margin: 10px auto;
+            font-size: 16px;
+        }
+
+        input:focus,
+        select:focus {
+            background-color: white;
+        }
+
+        button {
+            width: 35%;
+            padding: 2px;
+            background-color: lime;
+            border-radius: 6px;
+            resize: vertical;
+            margin-left: 15%;
+            font-weight: bold;
+        }
+
+        button:hover {
+            background-color: teal;
+            color: white;
+            cursor: pointer;
+            transition: 0.8s;
+        }
+
+        span {
+            margin-right: 5%;
+        }
+
+        hr {
+            width: 70%;
+            margin: 10px auto;
+            border-top: 1px solid #777;
+        }
+    </style>
+</head>
+
+<body>
+    <h1 style="color: white;"> 2022-04-07 hazai feladvány - többdimenziós tömbök</h1>
+    <main>
+        <article>
+            <h3>A feladatok</h3>
+            <ol>
+                <li>Két osztály tanulóinak magasságait tároljuk két tömbben. Kérdezd meg a felhasználótól, melyik
+                    osztály
+                    átlagos magasságát szeretné látni és a válaszának megfelelően jelenítsd meg az adott osztály átlagos
+                    magasságát!</li>
+                <li>Egy cég alkalmazottainak az adatait eltároltuk egy többdimenziós tömbben. Kérd be a felhasználótól,
+                    hogy
+                    melyik munkakörre vonatkoztatva írjuk ki, hogy mennyit költ a cég fizetésekre és jelenítsd meg a
+                    választ! Ha nem létezik a kért munkakör, írd ki, hogy <mark>nincs ilyen pozíció! </mark> </li>
+                <li>Találj ki és írj egy életszerű példa programot, amelynek a megoldásához tömböt és elágazást kell
+                    használni!</li>
+            </ol>
+            <div class="w3-panel w3-card w3-light-grey">
+                <h4>A három dimenziós tömb:</h4>
+                <div class="w3-code jsHigh notranslate">
+                    let alkalmazottak = [<br>
+                    // név, foglalkozás, havi bér<br>
+                    ["alice", "programozó", 140000],<br>
+                    ["bob", "programozó", 140000],<br>
+                    ["cecil", "tesztelő", 100000]<br>
+                    ];
+                </div>
+            </div>
+        </article>
+        <hr>
+        <article>
+            <h3>Első feladat:</h3>
+            <p>A két osztály tanulóinak magassága (a két tömb elemei a gyakorlatok.md első feladatának megfelelően) a
+                konzolon láthatóak</p>
+            <label for="osztaly">Mely osztály átlagmagasságát szeretné látni? </label>
+            <select name="osztaly" id="osztaly">
+                <option value="also">Alsósok</option>
+                <option value="felso">Felsősök</option>
+            </select>
+            <br><br>
+            <button onclick="magassag()">Lássuk az átlagot</button>
+            <br>
+            <p id="letszam"></p>
+            <p id="atlagMag"></p>
+        </article>
+
+        <article>
+            <h3>Második feladat:</h3>
+            <p>Cégünknél jelenleg két munkakörben dolgoznak: programozó és tesztelő.</p>
+            <p>Kérem válasszon melyik munkakörre vonatkoztatva írjuk ki, hogy mennyit költ a cég fizetésekre.</p>
+            <label for="bevitel">Írja be a választott munkakört: &nbsp; </label>
+            <input id="bevitel" type="text">
+            <br><br>
+            <button onclick="salary()">Lássuk a költséget</button>
+            <br>
+            <p id="payment"></p>
+        </article>
+
+        <article>
+            <h3>Harmadik feladat:</h3>
+            <h3 style="text-align: center;">Lottósorsolás</h3>
+            <p> <mark>Válasszon öt nyertes számot! </mark> </p>
+            <div id="container"></div>
+            <hr>
+            <p>Ma gépi sorsolás lesz</p>
+            <button onclick="sorsolas()">Induljon a lottósorsolás</button>
+            <br>
+            <p id="tipped"></p>
+            <p id="szoveg"></p>
+            <p id="sorsolt" style="padding-left: 4%;"></p>
+            <p id="eredmeny"></p>
+            <p id="nyert"></p>
+        </article>
+        <h3 style="text-align: center;">Gyakorló feladatok</h3>
+
+        <article>
+            <h3>Írd meg a t tömböt úgy, hogy a várt eredményeket kapjuk:</h3>
+            <div class="w3-panel w3-card w3-light-grey">
+                <div class="w3-code jsHigh notranslate">
+                    let t = [/* ? */];<br>
+                    <br>
+                    t[0] // "hello"<br>
+                    t[1] + t[2] // "55"<br>
+                    t.length // 5<br>
+                    t[3] // undefined<br>
+                    t[5] // undefine<br><br>
+                    // Ez alapján a tömb:<br>
+                    let t = ["hello", "5", "5", , ,];<br>
+                    // Azonban egy 5 elemű tömbnek nem lehet 6.= t[5] eleme<br>
+                    // Kiírás a konzolon
+                </div>
+            </div>
+        </article>
+
+        <article>
+            <h3>Írd ki a felsorolt értékeket a tömbből egyenként (indexeléssel)!:</h3>
+            <div class="w3-panel w3-card w3-light-grey">
+                <div class="w3-code jsHigh notranslate">
+                    let t = [<br>
+                    [1, 2, 3],<br>
+                    [4, 5, 6],<br>
+                    [7, 8, 9]<br>
+                    ];<br>
+                    <br>
+                    // Két for ciklussal végigmegyek minden tömb minen elemén<br>
+                    let index = 1; <br>
+                    for(let i = 0; i < t2.length; i++){<br>
+                        &nbsp;let egyTombHossza = t2[i].length;<br>
+                        &nbsp;for(let j = 0; j < egyTombHossza; j++) {<br>
+                        &nbsp;&nbsp;console.log(index +". elem: " + t2[i][j]);<br>
+                        &nbsp;&nbsp;index ++;<br>
+                        &nbsp;} <br>
+                            }
+                </div>
+            </div>
+        </article>
+    </main>
+
+    <script src="script.js"></script>
+    <script src="https://www.w3schools.com/lib/w3codecolor.js"></script>
+    <script>
+        w3CodeColor();
+    </script>
+</body>
+
+</html>
