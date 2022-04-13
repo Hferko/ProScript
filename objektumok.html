@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <title>JS Objektumok (asszociációs tömb)</title>
+    <style>
+        body {
+            background-color: maroon;
+            padding: 5px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 16px;
+        }
+
+        main {
+            width: 80%;
+            margin: 10px auto;
+            border: 1px solid #333;
+            box-shadow: 8px 8px 8px aquamarine;
+            border-radius: 10px;
+            padding: 15px;
+            background-color: beige;
+            text-align: center;
+        }
+
+        p {
+            line-height: 1.2;
+        }
+
+        article {
+            text-align: left;
+            padding: 10px;
+            border: 1px solid #999;
+            border-radius: 10px;
+            margin-top: 15px;
+            background-color: white;
+        }
+
+        input[type=text],
+        input[type=number] {
+            width: 30%;
+            padding: 2px;
+            border-radius: 6px;
+            resize: vertical;
+            background-color: #FFFACD;
+            margin: 10px auto;
+            font-size: 16px;
+        }
+
+        input:focus,
+        select:focus {
+            background-color: white;
+        }
+
+        button {
+            width: 35%;
+            padding: 2px;
+            background-color: lime;
+            border-radius: 6px;
+            resize: vertical;
+            margin-left: 15%;
+            font-weight: bold;
+        }
+
+        button:hover {
+            background-color: teal;
+            color: white;
+            cursor: pointer;
+            transition: 0.8s;
+        }
+
+        span {
+            margin-right: 5%;
+        }
+
+        hr {
+            width: 70%;
+            margin: 10px auto;
+            border-top: 1px solid #777;
+        }
+    </style>
+</head>
+
+<body>
+    <h1 style="color: white;"> 2022-04-12 - JS Objektumok</h1>
+    <main>
+        <article>
+            <h3>A feladat</h3>
+            <div class="w3-panel w3-card w3-light-grey">
+                <h4>Tekintsük az alábbi adatszerkezeteket és írjunk kódot a kérdések megválaszolására!</h4>
+                <div class="w3-code jsHigh notranslate">
+                    let szemelyek = {<br>
+                    &nbsp;"alice@example.com": {<br>
+                    &nbsp;&nbsp; nev: "Alice Allison",<br>
+                    &nbsp;&nbsp; szuletett: "1988-05-02"<br>
+                    &nbsp; },<br>
+                    &nbsp; "bob@example.com": {<br>
+                    &nbsp; &nbsp;nev: "Robert Robertsson",<br>
+                    &nbsp; &nbsp;szuletett: "1999-12-21"<br>
+                    &nbsp;}<br>
+                    };<br>
+                    <br>
+                    // kulcsok: felhasználói név<br>
+                    let vasarlok = {<br>
+                    &nbsp;"alice42": {<br>
+                    &nbsp;&nbsp;email: "alice@example.com"<br>
+                    &nbsp;},<br>
+                    "bobafett": {<br>
+                    &nbsp; &nbsp;email: "bob@example.com"<br>
+                    &nbsp;}<br>
+                    };<br>
+                    <br>
+                    let uj = {<br>
+                    &nbsp;nev: "Cecil Cecilianus",<br>
+                    &nbsp;email: "cecil@example.com",<br>
+                    &nbsp;szuletett: "1997-08-12"<br>
+                    };
+                </div>
+            </div>
+            <b>
+                <ul>
+                    <li>Kérd be egy vásárló felhasználói nevét és írd ki a születési dátumát!</li>
+                    <li>Mentsd el az <mark>uj</mark> objektum adatait a megfelelő objektumokba!</li>
+                </ul>
+            </b>
+            <article>
+                <p id="uj"></p>
+                <p id="persons"></p>
+                <p id="uj2"></p>
+                <p id="vasarlo"></p>
+                <p id="kiir"></p>
+
+                <script>
+                    let szemelyek = {
+                        "alice@example.com": {
+                            nev: "Alice Allison",
+                            szuletett: "1988-05-02"
+                        },
+                        "bob@example.com": {
+                            nev: "Robert Robertsson",
+                            szuletett: "1999-12-21"
+                        }
+                    };
+
+                    // kulcsok: felhasználói név
+                    let vasarlok = {
+                        "alice42": {
+                            email: "alice@example.com"
+                        },
+                        "bobafett": {
+                            email: "bob@example.com"
+                        }
+                    };
+
+                    let uj = {
+                        nev: "Cecil Cecilianus",
+                        email: "cecil@example.com",
+                        szuletett: "1997-08-12"
+                    };
+
+                    // ------- A feladat ----------------
+                    let keresettNev = prompt("Eddigi vásárlók:\n alice42\n\tés\nbobafett\nMely vásárló adatát szeretnéd tudni?");
+
+                    let birth = szemelyek[vasarlok[keresettNev].email].szuletett;
+
+                    alert("A \"" + keresettNev + "\" felhasználó születési dátuma:\n" + birth);
+
+                    // A feladat második része:                    
+                    let kulcs = uj.email;
+                    let key = "cecil";
+
+                    // Előbb a "belső objektumot" hozom létre
+                    ujSzemely = {
+                        nev: uj.nev,
+                        szuletett: uj.szuletett
+                    };
+
+                    ujVasarlo = {
+                        email: uj.email
+                    };
+
+                    szemelyek[kulcs] = ujSzemely;
+                    vasarlok[key] = ujVasarlo;
+
+                    console.log("Az új (Cecillel bövített) \"személyek\" objektum:");
+                    console.log(szemelyek);
+                    console.log("Az új (Cecillel bövített) \"vásárlók\" objektum:");
+                    console.log(vasarlok);
+
+                    let text = "", text2 = "";
+
+                    for (let elemek of Object.keys(szemelyek)) {
+                        text = text + elemek + "{<br>";
+                        for (let x in szemelyek[elemek]) {
+                            text = text + szemelyek[elemek][x] + "<br>";
+                        }
+                        text = text + "}<br>";
+                    }
+
+                    for (let elem of Object.keys(vasarlok)) {
+                        text2 = text2 + elem + "{<br>";
+                        for (let x in vasarlok[elem]) {
+                            text2 = text2 + vasarlok[elem][x] + "<br>";
+                        }
+                        text2 = text2 + "}<br>";
+                    }
+
+                    document.getElementById("uj").innerHTML = "Az új \"személyek\" objektum:";
+                    document.getElementById("persons").innerHTML = text;
+                    document.getElementById("uj2").innerHTML = "Az új \"vásárlók\" objektum:";
+                    document.getElementById("vasarlo").innerHTML = text2;
+                    document.getElementById("kiir").innerHTML = "Az adatok kírása konzolra is megtörtént.";
+                </script>
+
+            </article>
+            <article>
+                <div class="w3-panel w3-card w3-light-grey">
+                    <h4>Ezeket csak magamnak írom, mert elfelejtem hogyan csináltam</h4>
+                    <div class="w3-code jsHigh notranslate">
+                        let kulcs = uj.email;<br>
+                        let key = "cecil";<br>
+                        <br>
+                        // Előbb a "belső objektumot" hozom létre<br>
+                        ujSzemely = {<br>
+                        &nbsp;nev: uj.nev,<br>
+                        &nbsp;szuletett: uj.szuletett<br>
+                        };<br>
+                        <br>
+                        ujVasarlo = {<br>
+                        &nbsp;email: uj.email<br>
+                        };<br>
+                        <br>
+                        szemelyek[kulcs] = ujSzemely;<br>
+                        vasarlok[key] = ujVasarlo; <br>
+                        <br>
+                        console.log(szemelyek); <br>
+                        console.log(vasarlok);
+                    </div>
+                </div>
+            </article>
+
+
+    </main>
+    <script src="https://www.w3schools.com/lib/w3codecolor.js"></script>
+    <script>
+        w3CodeColor();
+    </script>
+</body>
+
+</html>
