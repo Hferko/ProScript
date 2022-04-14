@@ -164,10 +164,16 @@
                     // ------- A feladat ----------------
                     let keresettNev = prompt("Eddigi vásárlók:\n alice42\n\tés\nbobafett\nMely vásárló adatát szeretnéd tudni?");
 
-                    let birth = szemelyek[vasarlok[keresettNev].email].szuletett;
+                    
+                    if (vasarlok[keresettNev] == undefined){
+                        alert("Nincs ilyen felhesznlónév !");
+                    }
+                    else{
+                        let birth = szemelyek[vasarlok[keresettNev].email].szuletett;
+                        alert("A \"" + keresettNev + "\" felhasználó születési dátuma:\n" + birth);
+                    }
 
-                    alert("A \"" + keresettNev + "\" felhasználó születési dátuma:\n" + birth);
-
+                    
                     // A feladat második része:                    
                     let kulcs = uj.email;
                     let key = "cecil";
