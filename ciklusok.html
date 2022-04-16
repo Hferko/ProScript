@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <title>JS Ciklusok</title>
+    <style>
+        body {
+            background-color: maroon;
+            padding: 5px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 16px;
+        }
+
+        main {
+            width: 80%;
+            margin: 10px auto;
+            border: 1px solid #333;
+            box-shadow: 8px 8px 8px aquamarine;
+            border-radius: 10px;
+            padding: 15px;
+            background-color: beige;
+            text-align: center;
+        }
+
+        p {
+            line-height: 1.2;
+        }
+
+        article {
+            text-align: left;
+            padding: 10px;
+            border: 1px solid #999;
+            border-radius: 10px;
+            margin-top: 15px;
+            background-color: white;
+        }        
+
+        span {
+            margin-right: 5%;
+        }
+       
+    </style>
+</head>
+
+<body>
+    <h1 style="color: white;"> 2022-04-15 - JS Ciklusok, típuskonverzió</h1>
+    <main>
+        <article>
+            <h3>A feladat:</h3>
+            <ol>
+                <li>Kérj be egy <b>n</b> értéket. Ha nem szám, írd ki, hogy hibás input és kérd be újra, midaddig, amíg
+                    számot nem adott meg a felhasználó.</li>
+                <li>Tölts fel egy <b>t</b> tömböt <b>n</b> elemmel. Az elemek csak számok lehetnek. Ha nem számot adott
+                    meg a felhasználó, írd ki, hogy hibás input és kérd be újra, midaddig, amíg számot nem adott meg a
+                    felhasználó.</li>
+                <li>Kérd be, hogy <b>pozitív</b> vagy <b>negatív</b> számokat listázzunk. Ha nem a felsorolt értékek
+                    valamelyikét adta meg a felhasználó, írd ki, hogy <b>hibás input</b> és kérd be újra, midaddig, amíg
+                    nem a felsorolt értékek valamelyikét adta meg.</li>
+                <li>Írd a konzolra a felahsználó választása alapján a tömb pozitív vagy negatív elemeit. Ha váalsztás
+                    alapján nincs mit kiírni (pl. nincsenek pozitív számok), akkor írd ki, hogy <b>nincsenek ilyen
+                        számok a tömbben</b> .</li>
+                <li>Írd ki a <b>t</b> tömb elemeinek összegét.</li>
+            </ol>
+            <div class="w3-panel w3-card w3-light-grey">
+                <div class="w3-code jsHigh notranslate">
+                    [1, 2, 3] // 6<br>
+                    [2, 3, 4] // 9<br>
+                    [-1, -1, 3] // 1
+                </div>
+            </div>
+        </article>
+
+        <article>
+            <script>
+                let t = [];
+                let n = prompt("Egy tömböt szeretnék feltölteni az Ön által megadott számokkal.\nElőször is\nÍrja be kérem, hogy hány elemű legyen a tömb:");
+                let ind = 1;
+
+                while (!Number(n) || Number(n) < 0) {
+                    n = prompt("Hibás input.\nEgy pozitív egész számot kérnék...")
+                }
+                n = Number(n);
+                console.log("A tömb elemeinek száma: " + n);
+
+                while (ind < n + 1) {
+                    let elem = prompt("Jöhet a tömb " + ind + ". eleme:");
+
+                    while (Number(elem) == NaN) {
+                        elem = prompt("Egy számot kér a gép...")
+                    }
+
+                    elem = Number(elem);
+                    t.push(elem);
+                    ind++;
+                }
+
+                alert("Tömb feltöltve!\nAz ön által megadott " + n + " elemű tömb:\t" + t)
+                console.log(t);
+                let polarity = prompt("Mely számokat listázzam ki a tömbből? Írja be\nha pozitívakat: 'poz'\nha negatívokat: 'neg'");
+
+                while (polarity != "poz" && polarity != "neg") {
+                    polarity = prompt("Ha negatív: 'neg', ha pozitív: 'poz'");
+                }
+
+                if (polarity == "poz") {
+                    let x = 0;
+                    let poz = [];
+                    let even = [];
+
+                    while (x < t.length) {
+
+                        if (t[x] > 0) {
+                            poz.push(t[x]);
+                        }
+
+                        if (t[x] % 2 == 0) {
+                            even.push(t[x]);
+                        }
+                        x++;
+                    }
+
+                    if (poz.length < 1 && even.length < 1) {
+                        console.log("Nincs pozitív szám a tömbben");
+                        alert("Nincs pozitív szám a tömbben, de még páros sem.");
+                    }
+
+                    else if (poz.length < 1) {
+                        console.log("Nincs pozitív szám a tömbben");
+                        alert("Nincs pozitív szám a tömbben,\n azonban it láthatóak a benne lévő párosak\t" + even);
+                    }
+
+                    else if (even.length < 1) {
+                        console.log("Íme a pozitív számok: " + poz);
+                        alert("Íme a pozitív számok:\t" + poz + "\nde nincsenek páros számok");
+                    }
+
+                    else {
+                        console.log("Íme a pozitív számok: " + poz + "\n és a páros számok: " + even);
+                        alert("Íme a pozitív számok:\t" + poz + "\nés a páros számok:\t" + even);
+                    }
+                }
+                //---------------------------------------------
+
+                else if (polarity == "neg") {
+                    let y = 0;
+                    let neg = [];
+                    let odd = [];
+
+                    while (y < t.length) {
+
+                        if (t[y] < 0) {
+                            neg.push(t[y]);
+                        }
+
+                        if (t[y] % 2 != 0) {
+                            odd.push(t[y]);
+                        }
+                        y++;
+                    }
+
+                    if (neg.length < 1 && odd.length < 1) {
+                        console.log("Nincs negatív szám a tömbben");
+                        alert("Nincs negatív szám a tömbben, de még páratlan sem.");
+                    }
+
+                    else if (neg.length < 1) {
+                        console.log("Nincs negatív szám a tömbben");
+                        alert("Nincs negatív szám a tömbben,\n azonban it láthatóak a benne lévő páratlanok\t" + odd);
+                    }
+
+                    else if (odd.length < 1) {
+                        console.log("Íme a negatív számok: " + neg);
+                        alert("Íme a negatív számok:\t" + neg + "\nde nincsenek páratlan számok");
+                    }
+
+                    else {
+                        console.log("Íme a negatív számok: " + neg + "\n és a páratlan számok: " + odd);
+                        alert("Íme a negatív számok:\t" + neg + "\nés a páratlan számok:\t" + odd);
+                    }
+                }
+            </script>
+
+            <h3>A feladat 5.része</h3>
+            <div class="w3-panel w3-card w3-light-grey">
+                <p>Tekinthetjük őket három különálló tömbként, ekkor</p>
+                <div class="w3-code jsHigh notranslate">
+                    let t1=[1, 2, 3] // 6<br>
+                    let t2=[2, 3, 4] // 9<br>
+                    let t3=[-1, -1, 3] // 1
+                </div>
+            </div>
+            <ul id="tombok"></ul>
+
+            <script>
+                let t1 = [1, 2, 3];
+                let t2 = [2, 3, 4];
+                let t3 = [-1, -1, 3];
+
+                let osszeg = 0;
+                let index = 0;
+
+                while (index < t1.length) {
+                    osszeg += t1[index];
+                    index++
+                }
+                console.log("A t1 tömb elemeinek összege: " + osszeg);
+                $("#tombok").append("<li>A t1 tömb elemeinek összege: " + osszeg + "</li>");
+
+                index = 0;
+                osszeg = 0;
+                while (index < t2.length) {
+                    osszeg = osszeg + t2[index];
+                    index++
+                }
+                console.log("A t2 tömb elemeinek összege: " + osszeg);
+                $("#tombok").append("<li>A t2 tömb elemeinek összege: " + osszeg + "</li>");
+
+                index = 0;
+                osszeg = 0;
+                while (index < t3.length) {
+                    osszeg += t3[index];
+                    index++
+                }
+                console.log("A t3 tömb elemeinek összege: " + osszeg);
+                $("#tombok").append("<li>A t3 tömb elemeinek összege: " + osszeg + "</li>");
+
+            </script>
+            <div class="w3-panel w3-card w3-light-grey">
+                <p>Lehet azonban egyetlen bűbájos többdimenziós tömb:</p>
+                <div class="w3-code jsHigh notranslate">
+                    let t = [ <br>
+                    &nbsp;&nbsp; [1, 2, 3], <br>
+                    &nbsp;&nbsp; [2, 3, 4], <br>
+                    &nbsp;&nbsp; [-1, -1, 3] <br>
+                    &nbsp;]
+                </div>
+            </div>
+            <ol id="single"></ol>
+            <p id="full"></p>
+            <script>
+                let array = [
+                    [1, 2, 3],
+                    [2, 3, 4],
+                    [-1, -1, 3]
+                ];
+
+                let sum = 0;
+                let subtotal = 0;
+
+                console.log("Többdimenziós tömbként felfogva:")
+                for (let i = 0; i < array.length; i++) {
+                    for (let j = 0; j < array[i].length; j++) {
+                        sum = sum + array[i][j];
+                        subtotal = subtotal + array[i][j];
+                    }
+                    console.log((i + 1) + ". tömb elemeinek összege: " + subtotal);
+
+                    // Ezt a lista kiírást csak jQuery-vel tudtam megoldani
+                    $("#single").append("<li>tömb elemeinek összege: " + subtotal + "</li>");
+                    subtotal = 0;
+                }
+                console.log("A teljes 't' tömb elemeinek összege: " + sum);
+                document.getElementById("full").innerHTML = "A teljes 't' tömb elemeinek összege: " + sum;
+            </script>
+        </article>
+
+        <article>
+            <p id="singly"></p>
+            <ol id="fibo"></ol>
+            <script>
+                let fibo = [];
+
+                if (confirm("Az 5. feladat eredménye a konzolon és a HTML-ben látható.\nGyakorlatnak egy indefinit ciklussal Fibonacci-sorozatot hozok létre.\nFOLYTASSUK?") == true) {
+                    fibo.push(1);
+                    fibo.push(1);
+
+                    while (confirm("A sorozat elemei eddig: " + fibo + " - Elemek száma: " + fibo.length + "\nFOLYTASSUK?") == true && fibo.length < 8) {
+                        console.log("A Fibonacci-sorozat elemei eddig: " + fibo + " - Elemek száma:" + fibo.length);
+                        fibo.push(fibo[fibo.length - 1] + fibo[fibo.length - 2]);
+                    }
+                    alert("Mára legyen ennyi elég...\nA HTML-oldalon vagy a konzolon látható a teljes Fibonacci-sor");
+                    console.log("A Fibonacci-sor elemei egyenként:" + fibo + " - Elemek száma:" + fibo.length);
+                    document.getElementById("singly").innerHTML = "A Fibonacci-sor elemei egyenként:";
+
+                    for (let i = 0; i < fibo.length; i++) {
+                        $("#fibo").append("<li>elem: " + fibo[i] + "</li>");
+                        console.log("A sor " + (i + 1) + ". eleme: " + fibo[i]);
+                    }
+
+                } else {
+                    alert("Rendben. Befejezem mára.")
+                }
+            </script>
+        </article>
+
+
+    </main>
+    <script src="https://www.w3schools.com/lib/w3codecolor.js"></script>
+    <script>
+        w3CodeColor();
+    </script>
+</body>
+
+</html>
